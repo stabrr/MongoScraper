@@ -29,7 +29,12 @@ app.use(bodyParser.urlencoded({
 app.use(express.static("public"));
 
 // Database configuration with mongoose
-mongoose.connect("mongodb://localhost/NYTimesScrape");
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/NYTimesScrape";
+// mongoose.connect("mongodb://localhost/NYTimesScrape");
+mongoose.Promise = Promise;
+mongoose.connect(MONGODB_URI, {
+  useMongoClient: true
+});
 var db = mongoose.connection;
 
 // Show any mongoose errors
