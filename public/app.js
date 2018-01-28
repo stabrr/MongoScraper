@@ -3,11 +3,28 @@ $.getJSON("/articles", function(data) {
     // For each one
     for (var i = 0; i < data.length; i++) {
       // Display the apropos information on the page
-      $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p> <button type='button' name='save value='" + data[i]._id + "' class='btn btn-default btn-success'>Save Article</button>");
+        $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p> ");
+        $("#articles").append("<button type='button' name='save' value='" + data[i]._id + "' class='btn btn-default btn-success'>Save Article</button>");
     }
   });
   
   
+//when someone clicks on save button
+$(document).on("click","button[name='save']", function() {
+    console.log("i clicked on saved");
+    var thisId = $(this).attr("value");
+    console.log(thisId);
+    $.ajax({
+        method: "POST",
+        url: "/saved/" + thisId
+      })
+      //then
+      .done(function(data) {
+        console.log(data);
+      }); 
+});
+
+
   // Whenever someone clicks a p tag
   $(document).on("click", "p", function() {
     // Empty the notes from the note section

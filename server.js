@@ -84,6 +84,8 @@ app.get("/scrape", function(req, res) {
   res.redirect("../");
 });
 
+
+
 // This will get the articles we scraped from the mongoDB
 app.get("/articles", function(req, res) {
   // Grab every doc in the Articles array
@@ -112,6 +114,8 @@ app.get("/saved", function(req, res) {
     }
   });
 });
+
+
 
 // Grab an article by it's ObjectId
 app.get("/articles/:id", function(req, res) {
